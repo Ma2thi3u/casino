@@ -2,6 +2,7 @@
 
 import random
 
+
 def est_pair(nb):
 
     if nb % 2 == 0:
