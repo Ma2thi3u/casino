@@ -9,3 +9,9 @@ continuer = True
 maxi = 49
 
 mini = 0
+
+# Variables concernant l'affichage.
+
+WIDTH = 500
+
+HEIGHT = 500

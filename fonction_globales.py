@@ -2,6 +2,8 @@
 
 import random
 
+import pygame
+
 
 def est_pair(nb):
 
@@ -46,3 +48,13 @@ def rejouer():
             continue
 
     return continuer
+
+def wait_escape():
+    encore = 1
+    while encore == 1:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    encore = 0
+            if event.type == pygame.QUIT:
+                encore = 0

@@ -12,6 +12,7 @@ from fonction_globales import *
 
 # Définition de la fonction jouer (fonction principale).
 
+
 def jouer():
 
     global porte_monaie
