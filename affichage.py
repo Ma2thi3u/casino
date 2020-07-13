@@ -51,12 +51,65 @@ while continuer:
 
 # Affichage choix joueur.
 
-rect = [WIDTH // 4 - (WIDTH_BOUTON_JOUER//2), HEIGHT // 4 - (HEIGHT_BOUTON_JOUER//2), WIDTH_BOUTON_JOUER, HEIGHT_BOUTON_JOUER]
+
+
+i = 0
+y = 0
+
+while y != 5 and i != 10:
+
+    if (i * CASE % 100 == 0 and y * CASE % 100 == 0) or ((i * CASE % 100 != 0 and y * CASE % 100 != 0)):
+
+        rect = [i * CASE, y * CASE, CASE, CASE]
+        pygame.draw.rect(screen, black, rect)
+
+        texte = y * 10 + i
+        affiche_texte(screen, str(texte), rect, red, 15)
+
+    if (i * CASE % 100 != 0 and y * CASE % 100 == 0) or (i * CASE % 100 == 0 and y * CASE % 100 != 0):
+
+        rect = [i * CASE, y * CASE, CASE, CASE]
+        pygame.draw.rect(screen, red, rect)
+
+        texte = y * 10 + i
+        affiche_texte(screen, str(texte), rect, black, 15)
+
+    i += 1
+
+    if i * CASE == WIDTH:
+
+        y += 1
+        i = 0
+
+continuer = True
+
+while continuer:
+
+    for event in pygame.event.get():
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+
+            if event.button == 1:
+
+                x = event.pos[0] // 50
+                y = event.pos[1] // 50
+
+                choixjoueur = y * 10 + x
+
+                screen.fill(darkgreen)
+
+                continuer = False
+
+# Affichage du choix du joueur.
+
+rect = [WIDTH // 4 - WIDTH_BOUTON_JOUER // 2, HEIGHT // 4 - HEIGHT_BOUTON_JOUER // 2, WIDTH_BOUTON_JOUER, HEIGHT_BOUTON_JOUER]
 pygame.draw.rect(screen, black, rect, 1)
 
-# Affichage choix aleatoire.
+affiche_texte(screen, str(choixjoueur), rect, black, 15)
 
-rect = [WIDTH * 3 // 4 - (WIDTH_BOUTON_JOUER//2), HEIGHT // 4 - (HEIGHT_BOUTON_JOUER//2), WIDTH_BOUTON_JOUER, HEIGHT_BOUTON_JOUER]
+# Affichage du choix aleatoire.
+
+rect = [WIDTH * 3 // 4 - WIDTH_BOUTON_JOUER // 2, HEIGHT // 4 - HEIGHT_BOUTON_JOUER // 2, WIDTH_BOUTON_JOUER, HEIGHT_BOUTON_JOUER]
 pygame.draw.rect(screen, black, rect, 1)
 
 affiche_texte(screen, choix_aleatoire(), rect, black, 15)
@@ -68,4 +121,4 @@ pygame.display.flip()
 # Attente de la fermeture de la fenetre
 
 wait_escape()
-            
+        
