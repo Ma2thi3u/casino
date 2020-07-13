@@ -6,8 +6,6 @@ from fonction_globales import *
 
 from variables_globales import *
 
-from casino import *
-
 from couleurs import *
 
 # Initialisation du module pygame.
@@ -105,14 +103,33 @@ while continuer:
 rect = [WIDTH // 4 - WIDTH_BOUTON_JOUER // 2, HEIGHT // 4 - HEIGHT_BOUTON_JOUER // 2, WIDTH_BOUTON_JOUER, HEIGHT_BOUTON_JOUER]
 pygame.draw.rect(screen, black, rect, 1)
 
-affiche_texte(screen, str(choixjoueur), rect, black, 15)
+if est_pair(choixjoueur):
+
+    pygame.draw.rect(screen, black, rect)
+    affiche_texte(screen, str(choixjoueur), rect, red, 15)
+
+else:
+
+    pygame.draw.rect(screen, red, rect)
+    affiche_texte(screen, str(choixjoueur), rect, black, 15)
 
 # Affichage du choix aleatoire.
 
 rect = [WIDTH * 3 // 4 - WIDTH_BOUTON_JOUER // 2, HEIGHT // 4 - HEIGHT_BOUTON_JOUER // 2, WIDTH_BOUTON_JOUER, HEIGHT_BOUTON_JOUER]
 pygame.draw.rect(screen, black, rect, 1)
 
-affiche_texte(screen, choix_aleatoire(), rect, black, 15)
+choix_aleatoire = int(choix_aleatoire())
+
+if est_pair(choix_aleatoire):
+
+    pygame.draw.rect(screen, black, rect)       
+    affiche_texte(screen, str(choix_aleatoire), rect, red, 15)
+
+else:
+
+    pygame.draw.rect(screen, red, rect)       
+    affiche_texte(screen, str(choix_aleatoire), rect, black, 15)
+
 
 # Actualisation de la fenetre.
 

@@ -4,6 +4,8 @@ import random
 
 import pygame
 
+from variables_globales import *
+
 
 def est_pair(nb):
 
@@ -83,3 +85,10 @@ def affiche_texte(screen, texte, rect, couleur_texte, size):
    
     # desinitialisation de la fonte
     pygame.font.quit()
+
+
+def choix_aleatoire():
+
+    roulette = random.randint(mini, maxi)
+
+    return str(roulette)
