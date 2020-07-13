@@ -13,6 +13,12 @@ from fonction_globales import *
 # Définition de la fonction jouer (fonction principale).
 
 
+def choix_aleatoire():
+
+    roulette = random.randint(mini, maxi)
+
+    return str(roulette)
+
 def jouer():
 
     global porte_monaie
