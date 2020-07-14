@@ -240,32 +240,35 @@ while continuer:
 
 # Affichage du choix du joueur.
 
-rect = [WIDTH // 4 - WIDTH_BOUTON // 2, HEIGHT // 4 - HEIGHT_BOUTON // 2, WIDTH_BOUTON, HEIGHT_BOUTON]
-pygame.draw.rect(screen, black, rect, 1)
+x_choix_joueur = WIDTH // 4
+y_choix_joueur = HEIGHT // 4
 
-try:
+if choixjoueur == "Pair":
 
-    if est_pair(choixjoueur):
+    choixjoueur = 50
 
-        pygame.draw.rect(screen, black, rect)
-        affiche_texte(screen, str(choixjoueur), rect, red, 15)
+elif choixjoueur == "Impair":
 
-    elif est_impair(choixjoueur):
+    choixjoueur = 51
 
-        pygame.draw.rect(screen, red, rect)
-        affiche_texte(screen, str(choixjoueur), rect, black, 15)
 
-except:
+if est_pair(choixjoueur) and choixjoueur < 50:
 
-    if choixjoueur == "Pair":
+    creer_bouton(screen, x_choix_joueur, y_choix_joueur, WIDTH_BOUTON, HEIGHT_BOUTON, red, black, str(choixjoueur), 0)
 
-        pygame.draw.rect(screen, black, rect)
-        affiche_texte(screen, str(choixjoueur), rect, red, 15)
+elif est_impair(choixjoueur) and choixjoueur < 50:
 
-    elif choixjoueur == "Impair":
+    creer_bouton(screen, x_choix_joueur, y_choix_joueur, WIDTH_BOUTON, HEIGHT_BOUTON, black, red, str(choixjoueur), 0)
 
-        pygame.draw.rect(screen, red, rect)
-        affiche_texte(screen, str(choixjoueur), rect, black, 15)
+elif choixjoueur == 50:
+
+    creer_bouton(screen, x_choix_joueur, y_choix_joueur, WIDTH_BOUTON, HEIGHT_BOUTON, red, black, "Pair", 0)
+
+elif choixjoueur == 51:
+
+    creer_bouton(screen, x_choix_joueur, y_choix_joueur, WIDTH_BOUTON, HEIGHT_BOUTON, black, red, "Impair", 0)
+
+
 
 # Affichage du choix aleatoire.
 
@@ -283,7 +286,6 @@ else:
 
     pygame.draw.rect(screen, red, rect)       
     affiche_texte(screen, str(choix_aleatoire), rect, black, 15)
-
 
 # Actualisation de la fenetre.
 

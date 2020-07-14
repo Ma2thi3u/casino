@@ -95,10 +95,10 @@ def choix_aleatoire():
 
     return str(roulette)
 
-def creer_bouton(screen, x, y, width, height, color_text, color_fond, text):
+def creer_bouton(screen, x, y, width, height, color_text, color_fond, text, border_radius=2):
 
     rect = [x - width // 2, y - height // 2, width, height]
     pygame.draw.rect(screen, darkgreen, rect)
-    pygame.draw.rect(screen, color_fond, rect, 2)
+    pygame.draw.rect(screen, color_fond, rect, border_radius)
 
     affiche_texte(screen, text, rect, color_text, 15)
