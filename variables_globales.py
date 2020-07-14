@@ -2,7 +2,18 @@
 
 # Fichier contenant les variables globales relatives au programe casino.py
 
+
+# Variables relatives aux boutons.
+
+WIDTH_BOUTON = 100
+
+HEIGHT_BOUTON = 50
+
+
+
 porte_monaie = 500
+
+mise = int()
 
 continuer = True
 
@@ -17,10 +28,6 @@ WIDTH = 500
 HEIGHT = 500
 
 SIZE = (WIDTH, HEIGHT)
-
-WIDTH_BOUTON_JOUER = 100
-
-HEIGHT_BOUTON_JOUER = 50
 
 CASE = WIDTH // 10
 

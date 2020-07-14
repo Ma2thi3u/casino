@@ -94,3 +94,11 @@ def choix_aleatoire():
     roulette = random.randint(mini, maxi)
 
     return str(roulette)
+
+def creer_bouton(screen, x, y, width, height, color_text, color_fond, text):
+
+    rect = [x - width // 2, y - height // 2, width, height]
+    pygame.draw.rect(screen, darkgreen, rect)
+    pygame.draw.rect(screen, color_fond, rect, 2)
+
+    affiche_texte(screen, text, rect, color_text, 15)

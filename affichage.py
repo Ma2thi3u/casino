@@ -26,50 +26,35 @@ screen.fill(darkgreen)
 
 # Création / placement du bouton jouer.
 
-x_jouer = WIDTH // 2
-y_jouer = HEIGHT // 4
+x_bouton_jouer = WIDTH // 2
+y_bouton_jouer = HEIGHT // 4
 
-rect = [x_jouer - WIDTH_BOUTON_JOUER // 2, y_jouer - HEIGHT_BOUTON_JOUER // 2, WIDTH_BOUTON_JOUER, HEIGHT_BOUTON_JOUER]
-pygame.draw.rect(screen, black, rect, 2)
-
-# Texte bouton jouer
-
-affiche_texte(screen, "Jouer", rect, black, 15)
+creer_bouton(screen, x_bouton_jouer, y_bouton_jouer, WIDTH_BOUTON, HEIGHT_BOUTON, black, black, "Jouer")
 
 # Création / placement porte monnaie
 
-x_porte_monnaie = x_jouer
-y_porte_monnaie = HEIGHT * 3 / 5
-
-rect_porte_monnaie = [x_porte_monnaie - WIDTH_BOUTON_JOUER, y_porte_monnaie - HEIGHT_BOUTON_JOUER // 2, 2 * WIDTH_BOUTON_JOUER, HEIGHT_BOUTON_JOUER]
-pygame.draw.rect(screen, black, rect_porte_monnaie, 2)
+x_bouton_porte_monnaie = x_bouton_jouer
+y_bouton_porte_monnaie = HEIGHT * 3 / 5
 
 texte = "Porte monnaie : {} €".format(str(porte_monaie))
-affiche_texte(screen, texte, rect_porte_monnaie, black, 15)
+
+creer_bouton(screen, x_bouton_porte_monnaie, y_bouton_porte_monnaie, WIDTH_BOUTON * 2, HEIGHT_BOUTON, black, black, texte)
 
 # Gestion porte monnaie (add / remove).
 
 # Bouton ajouer
 
-x_add = 4 * WIDTH // 5
-y_add = y_porte_monnaie
+x_bouton_add = 4 * WIDTH // 5
+y_bouton_add = y_bouton_porte_monnaie
 
-rect = [x_add - WIDTH_BOUTON_JOUER // 4, y_add - HEIGHT_BOUTON_JOUER // 2, WIDTH_BOUTON_JOUER // 2, HEIGHT_BOUTON_JOUER]
-pygame.draw.rect(screen, black, rect, 2)
-
-affiche_texte(screen, "+", rect, black, 15)
+creer_bouton(screen, x_bouton_add, y_bouton_add, WIDTH_BOUTON // 2, HEIGHT_BOUTON, black, black, "+")
 
 # Bouton remove
 
-x_remove = WIDTH // 5
-y_remove = y_porte_monnaie
+x_bouton_remove = WIDTH // 5
+y_bouton_remove = y_bouton_porte_monnaie
 
-rect = [x_remove - WIDTH_BOUTON_JOUER // 4, y_remove - HEIGHT_BOUTON_JOUER // 2, WIDTH_BOUTON_JOUER // 2, HEIGHT_BOUTON_JOUER]
-pygame.draw.rect(screen, black, rect, 2)
-
-affiche_texte(screen, "-", rect, black, 15)
-
-pygame.display.flip()
+creer_bouton(screen, x_bouton_remove, y_bouton_remove, WIDTH_BOUTON // 2, HEIGHT_BOUTON, black, black, "-")
 
 # Gestion du clic sur les boutons (porte monnaie).
 
@@ -83,69 +68,68 @@ while continuer:
 
             if event.button == 1:
 
-                if event.pos[0] >= x_remove - WIDTH_BOUTON_JOUER // 4 and event.pos[0] <= x_remove + WIDTH_BOUTON_JOUER // 4:
+                if event.pos[0] >= x_bouton_remove - WIDTH_BOUTON // 4 and event.pos[0] <= x_bouton_remove + WIDTH_BOUTON // 4:
 
-                    if event.pos[1] >= y_remove - HEIGHT_BOUTON_JOUER // 2 and event.pos[1] <= y_remove + HEIGHT_BOUTON_JOUER // 2:
+                    if event.pos[1] >= y_bouton_remove - HEIGHT_BOUTON // 2 and event.pos[1] <= y_bouton_remove + HEIGHT_BOUTON // 2:
 
-                        porte_monaie -= 10
+                        if porte_monaie <= 0:
 
-                        pygame.draw.rect(screen, darkgreen, rect_porte_monnaie)
-                        pygame.draw.rect(screen, black, rect_porte_monnaie, 2)
+                            pass
 
+                        else:
+
+                            porte_monaie -= 10
 
                         texte = "Porte monnaie : {} €".format(str(porte_monaie))
-                        affiche_texte(screen, texte, rect_porte_monnaie, black, 15)
+                        creer_bouton(screen, x_bouton_porte_monnaie, y_bouton_porte_monnaie, WIDTH_BOUTON * 2, HEIGHT_BOUTON, black, black, texte)
 
-                elif event.pos[0] >= x_add - WIDTH_BOUTON_JOUER // 4 and event.pos[0] <= x_add + WIDTH_BOUTON_JOUER // 4:
+                elif event.pos[0] >= x_bouton_add - WIDTH_BOUTON // 4 and event.pos[0] <= x_bouton_add + WIDTH_BOUTON // 4:
 
-                        if event.pos[1] >= y_add - HEIGHT_BOUTON_JOUER // 2 and event.pos[1] <= y_add + HEIGHT_BOUTON_JOUER // 2:
+                        if event.pos[1] >= y_bouton_add - HEIGHT_BOUTON // 2 and event.pos[1] <= y_bouton_add + HEIGHT_BOUTON // 2:
 
                             porte_monaie += 10
 
-                            pygame.draw.rect(screen, darkgreen, rect_porte_monnaie)
-                            pygame.draw.rect(screen, black, rect_porte_monnaie, 2)
-
-
                             texte = "Porte monnaie : {} €".format(str(porte_monaie))
-                            affiche_texte(screen, texte, rect_porte_monnaie, black, 15)
+                            creer_bouton(screen, x_bouton_porte_monnaie, y_bouton_porte_monnaie, WIDTH_BOUTON * 2, HEIGHT_BOUTON, black, black, texte)
 
-                elif event.pos[0] > x_jouer - WIDTH_BOUTON_JOUER // 2 and event.pos[0] < x_jouer + WIDTH_BOUTON_JOUER // 2:
+                elif event.pos[0] > x_bouton_jouer - WIDTH_BOUTON // 2 and event.pos[0] < x_bouton_jouer + WIDTH_BOUTON // 2:
 
-                    if event.pos[1] > y_jouer - HEIGHT_BOUTON_JOUER // 2 and event.pos[1] < y_jouer + HEIGHT_BOUTON_JOUER // 2:
+                    if event.pos[1] > y_bouton_jouer - HEIGHT_BOUTON // 2 and event.pos[1] < y_bouton_jouer + HEIGHT_BOUTON // 2:
 
-                        screen.fill(darkgreen)
+                        if porte_monaie > 0:
 
-                        continuer = False
+                            screen.fill(darkgreen)
 
+                            continuer = False
 
 # Affichage choix joueur (nombres).
 
 i = 0
-y = 0
+j = 0
 
-while y != 5 and i != 10:
+while j != 5 and i != 10:
 
-    if (i * CASE % 100 == 0 and y * CASE % 100 == 0) or ((i * CASE % 100 != 0 and y * CASE % 100 != 0)):
+    if (i * CASE % 100 == 0 and j * CASE % 100 == 0) or ((i * CASE % 100 != 0 and j * CASE % 100 != 0)):
 
-        rect = [i * CASE, y * CASE, CASE, CASE]
-        pygame.draw.rect(screen, red, rect)
-
-        texte = y * 10 + i
-        affiche_texte(screen, str(texte), rect, black, 15)
-
-    if (i * CASE % 100 != 0 and y * CASE % 100 == 0) or (i * CASE % 100 == 0 and y * CASE % 100 != 0):
-
-        rect = [i * CASE, y * CASE, CASE, CASE]
+        rect = [i * CASE, j * CASE, CASE, CASE]
         pygame.draw.rect(screen, black, rect)
 
-        texte = y * 10 + i
+        texte = j * 10 + i
         affiche_texte(screen, str(texte), rect, red, 15)
+
+    if (i * CASE % 100 != 0 and j * CASE % 100 == 0) or (i * CASE % 100 == 0 and j * CASE % 100 != 0):
+
+        rect = [i * CASE, j * CASE, CASE, CASE]
+        pygame.draw.rect(screen, red, rect)
+
+        texte = j * 10 + i
+        affiche_texte(screen, str(texte), rect, black, 15)
 
     i += 1
 
     if i * CASE == WIDTH:
 
-        y += 1
+        j += 1
         i = 0
 
 # Affichage choix joueur (pair / impair).
@@ -168,41 +152,32 @@ pygame.display.flip()
 
 # Gestion de la mise
 
+mise = porte_monaie
+
 # Création / placement porte monnaie
 
-x_porte_monnaie = WIDTH // 2
-y_porte_monnaie = HEIGHT * 4 / 5
+x_bouton_mise = WIDTH // 2
+y_bouton_mise = HEIGHT * 4 / 5
 
-rect_porte_monnaie = [x_porte_monnaie - WIDTH_BOUTON_JOUER, y_porte_monnaie - HEIGHT_BOUTON_JOUER // 2, 2 * WIDTH_BOUTON_JOUER, HEIGHT_BOUTON_JOUER]
-pygame.draw.rect(screen, black, rect_porte_monnaie, 2)
-
-affiche_texte(screen, str(porte_monaie), rect_porte_monnaie, black, 15)
+creer_bouton(screen, x_bouton_mise, y_bouton_mise, WIDTH_BOUTON * 2, HEIGHT_BOUTON, black, black, str(mise))
 
 # Gestion porte monnaie (add / remove).
 
 # Bouton ajouer
 
-x_add = 4 * WIDTH // 5
-y_add = y_porte_monnaie
+x_bouton_add = 4 * WIDTH // 5
+y_bouton_add = y_bouton_mise
 
-rect = [x_add - WIDTH_BOUTON_JOUER // 4, y_add - HEIGHT_BOUTON_JOUER // 2, WIDTH_BOUTON_JOUER // 2, HEIGHT_BOUTON_JOUER]
-pygame.draw.rect(screen, black, rect, 2)
-
-affiche_texte(screen, "+", rect, black, 15)
+creer_bouton(screen, x_bouton_add, y_bouton_add, WIDTH_BOUTON // 2, HEIGHT_BOUTON, black, black, "+")
 
 # Bouton remove
 
-x_remove = WIDTH // 5
-y_remove = y_porte_monnaie
+x_bouton_remove = WIDTH // 5
+y_bouton_remove = y_bouton_mise
 
-rect = [x_remove - WIDTH_BOUTON_JOUER // 4, y_remove - HEIGHT_BOUTON_JOUER // 2, WIDTH_BOUTON_JOUER // 2, HEIGHT_BOUTON_JOUER]
-pygame.draw.rect(screen, black, rect, 2)
-
-affiche_texte(screen, "-", rect, black, 15)
+creer_bouton(screen, x_bouton_remove, y_bouton_remove, WIDTH_BOUTON // 2, HEIGHT_BOUTON, black, black, "-")
 
 pygame.display.flip()
-
-# Gestion clic.
 
 continuer = True
 
@@ -213,6 +188,34 @@ while continuer:
         if event.type == pygame.MOUSEBUTTONDOWN:
 
             if event.button == 1:
+
+                if event.pos[0] >= x_bouton_remove - WIDTH_BOUTON // 4 and event.pos[0] <= x_bouton_remove + WIDTH_BOUTON // 4:
+
+                    if event.pos[1] >= y_bouton_remove - HEIGHT_BOUTON // 2 and event.pos[1] <= y_bouton_remove + HEIGHT_BOUTON // 2:
+
+                        if mise <= 0:
+
+                            pass
+
+                        else:
+
+                            mise -= 10
+
+                        creer_bouton(screen, x_bouton_mise, y_bouton_mise, WIDTH_BOUTON * 2, HEIGHT_BOUTON, black, black, str(mise))
+
+                elif event.pos[0] >= x_bouton_add - WIDTH_BOUTON // 4 and event.pos[0] <= x_bouton_add + WIDTH_BOUTON // 4:
+
+                    if event.pos[1] >= y_bouton_add - HEIGHT_BOUTON // 2 and event.pos[1] <= y_bouton_add + HEIGHT_BOUTON // 2:
+
+                        if mise >= porte_monaie:
+
+                            pass
+
+                        else:
+
+                            mise += 10
+
+                        creer_bouton(screen, x_bouton_mise, y_bouton_mise, WIDTH_BOUTON * 2, HEIGHT_BOUTON, black, black, str(mise))
 
                 x = event.pos[0] // 50
                 y = event.pos[1] // 50
@@ -237,22 +240,36 @@ while continuer:
 
 # Affichage du choix du joueur.
 
-rect = [WIDTH // 4 - WIDTH_BOUTON_JOUER // 2, HEIGHT // 4 - HEIGHT_BOUTON_JOUER // 2, WIDTH_BOUTON_JOUER, HEIGHT_BOUTON_JOUER]
+rect = [WIDTH // 4 - WIDTH_BOUTON // 2, HEIGHT // 4 - HEIGHT_BOUTON // 2, WIDTH_BOUTON, HEIGHT_BOUTON]
 pygame.draw.rect(screen, black, rect, 1)
 
-if choixjoueur == "Pair" or est_pair(choixjoueur):
+try:
 
-    pygame.draw.rect(screen, black, rect)
-    affiche_texte(screen, str(choixjoueur), rect, red, 15)
+    if est_pair(choixjoueur):
 
-elif choixjoueur == "Impair" or est_impair(choixjoueur):
+        pygame.draw.rect(screen, black, rect)
+        affiche_texte(screen, str(choixjoueur), rect, red, 15)
 
-    pygame.draw.rect(screen, red, rect)
-    affiche_texte(screen, str(choixjoueur), rect, black, 15)
+    elif est_impair(choixjoueur):
+
+        pygame.draw.rect(screen, red, rect)
+        affiche_texte(screen, str(choixjoueur), rect, black, 15)
+
+except:
+
+    if choixjoueur == "Pair":
+
+        pygame.draw.rect(screen, black, rect)
+        affiche_texte(screen, str(choixjoueur), rect, red, 15)
+
+    elif choixjoueur == "Impair":
+
+        pygame.draw.rect(screen, red, rect)
+        affiche_texte(screen, str(choixjoueur), rect, black, 15)
 
 # Affichage du choix aleatoire.
 
-rect = [WIDTH * 3 // 4 - WIDTH_BOUTON_JOUER // 2, HEIGHT // 4 - HEIGHT_BOUTON_JOUER // 2, WIDTH_BOUTON_JOUER, HEIGHT_BOUTON_JOUER]
+rect = [WIDTH * 3 // 4 - WIDTH_BOUTON // 2, HEIGHT // 4 - HEIGHT_BOUTON // 2, WIDTH_BOUTON, HEIGHT_BOUTON]
 pygame.draw.rect(screen, black, rect, 1)
 
 choix_aleatoire = int(choix_aleatoire())
