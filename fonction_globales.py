@@ -6,6 +6,8 @@ import pygame
 
 from variables_globales import *
 
+from couleurs import *
+
 
 def est_pair(nb):
 
